@@ -49,10 +49,12 @@ for ind, password in enumerate(passwords):
     print(lowers[ind])
     print(uppers[ind])
     print(characters[ind])
-    print(password[int(lowers[ind])-1])
-    print(password[int(uppers[ind])-1])
-    
-    # part 2 result
-    if (characters[ind] == password[int(lowers[ind])-1]) ^ (characters[ind] == password[int(uppers[ind])-1]):
+    print(password[int(lowers[ind]) - 1])
+    print(password[int(uppers[ind]) - 1])
+
+    # part 2 result - XOR operator is ^
+    if (characters[ind] == password[int(lowers[ind]) - 1]) ^ (
+        characters[ind] == password[int(uppers[ind]) - 1]
+    ):
         part_2_total += 1
-    print(f'part 2 total: {part_2_total}')
+    print(f"part 2 total: {part_2_total}")
