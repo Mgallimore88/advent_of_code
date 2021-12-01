@@ -9,3 +9,6 @@ class Instruction:
         if self.number_of_times_called >1:
             return True
     
+    def reset(self):
+        self.number_of_times_called = 0
+    

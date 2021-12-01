@@ -50,7 +50,7 @@ class Field_Validator:
                     if not 59 < int(height) < 76:
                         self.profile_valid = False
             if key == 'hcl':
-                x = re.findall("[r'\A#'][r'\d']r'{6}'", self.profile_dict['hcl'])
+                x = re.findall("[\A#][\d]{6}", self.profile_dict['hcl'])
                 print(x)
 
 
