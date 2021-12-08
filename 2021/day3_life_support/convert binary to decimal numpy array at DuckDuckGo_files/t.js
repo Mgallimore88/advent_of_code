@@ -1,0 +1,1 @@
+DDG.duckbar.future_signal_tab({signal:'medium',from:'nlp_qa'});nrj('/a.js?p=1&src_id=stack_overflow&from=nlp_qa&id=51698186&q=how%20to%20convert%20a%20binary%20numpy%20array%20to%20decimal&s=stackoverflow.com&tl=python%20%2D%20how%20to%20convert%20a%20binary%20numpy%20array%20to%20decimal');

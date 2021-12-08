@@ -18,6 +18,7 @@ def number_part(move):
     number = move.split(" ")[1]
     return int(number)
 
+
 # check how far the submarine moved and increment
 for move in movements:
     if word_part(move) == "forward":

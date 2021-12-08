@@ -3,13 +3,13 @@ with open("input") as file:
     raw = file.readlines()
 movements = [line.strip("\n") for line in raw]
 
-class Submarine: 
+
+class Submarine:
     def __init__(self):
         self.horizontal = 0
         self.depth = 0
         self.aim = 0
 
-    
     def update(self, word, number):
         if word == "forward":
             self.horizontal += number
@@ -18,6 +18,7 @@ class Submarine:
             self.aim -= number
         elif word == "down":
             self.aim += number
+
 
 def word_part(move):
     word = move.split(" ")[0]
@@ -32,9 +33,6 @@ def number_part(move):
 sub = Submarine()
 
 for move in movements:
-    sub.update(word_part(move),
-               number_part(move))
+    sub.update(word_part(move), number_part(move))
 
 print(sub.horizontal * sub.depth)
-
-
