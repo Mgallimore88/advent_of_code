@@ -3,8 +3,8 @@
 file = "input"
 running_total = 0
 
-score_dict = {"X": 1, "Y": 2, "Z": 3}
-win_dict = {
+throw_scores = {"X": 1, "Y": 2, "Z": 3}
+win_scores = {
     "AX": 3,
     "AY": 6,
     "AZ": 0,
@@ -23,8 +23,8 @@ with open(file) as f:
         opponent = line[0]
         response = line[2]
 
-        results = win_dict[opponent + response]
-        throws = score_dict[response]
+        win_score = win_scores[opponent + response]
+        throw_score = throw_scores[response]
 
-        running_total += results + throws
+        running_total += win_score + throw_score
 print(running_total)
