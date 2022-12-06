@@ -1,5 +1,5 @@
-# solution to advent of code Dec 5 part 1
-# https://adventofcode.com/2022/day/4
+# solution to advent of code Dec 5 part 2
+# https://adventofcode.com/2022/day/5
 
 
 stacks = {
