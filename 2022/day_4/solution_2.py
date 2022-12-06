@@ -1,4 +1,4 @@
-# solution to advent of code Dec 4 part 1
+# solution to advent of code Dec 4 part 2
 # https://adventofcode.com/2022/day/4
 
 
