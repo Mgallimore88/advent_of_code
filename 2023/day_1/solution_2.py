@@ -1,31 +1,42 @@
-file = "input"
+file = "input.txt"
 
-
-# need to make a function similar to isdigit, but for the list of words contained in this dict:
-
-number_words = {
-    "one": 1,
-    "two": 2,
-    "three": 3,
-    "four": 4,
-    "five": 5,
-    "six": 6,
-    "seven": 7,
-    "eight": 8,
-    "nine": 9,
+word_to_num = {
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
 }
 
-
-def get_highest_key(dict):
-    return max(dict.keys())
+number_words = word_to_num.keys()
 
 
-def get_lowest_key(dict):
-    # if not -1
-    try:
-        return min([k for k in dict.keys() if k != -1])
-    except:
-        return None
+class NumberTracker:
+    """
+    Keeps track of the numbers and their index along the string.
+    The numbers are stored as strings for easier concatenation.
+    """
+
+    def __init__(self):
+        self.item_dict = {}
+
+    def add(self, index: int, number: str):
+        if number.isdigit():
+            self.item_dict[index] = number
+        elif number.isalpha():
+            self.item_dict[index] = word_to_num[number]
+
+    def get_first(self):
+        min_idx = min(self.item_dict.keys())
+        return self.item_dict[min_idx]
+
+    def get_last(self):
+        max_idx = max(self.item_dict.keys())
+        return self.item_dict[max_idx]
 
 
 with open(file) as f:
@@ -34,25 +45,33 @@ with open(file) as f:
     total = int(0)
 
     for line in lines:
-        print(line)
-        nums = [int(s) for s in list(line) if s.isdigit()]
+        tracker = NumberTracker()
 
-        last_num = nums[-1]
-        last_num_idx = line.find(str(last_num))
+        # First deal with the numeric characters like '1'.
+        positions = [pair for pair in list(enumerate(line)) if pair[1].isdigit()]
 
-        first_num = nums[0]
-        first_num_idx = line.find(str(first_num))
+        # only add numbers from the line if there were some.
+        if positions:
+            for idx, num in positions:
+                tracker.add(idx, num)
+        positions = []
 
-        word_idx_dict = {}
+        # Second deal with the spelled numbers like 'one'.
+        # Number-words might occur more than once per line, so add each one until there are none left.
         for word in number_words:
-            print(word)
-            print(line.find(word))
-            word_idx_dict[line.find(word)] = word
+            idx = 0
+            word_length = len(word)
 
-        first_num_word = word_idx_dict[get_lowest_key(word_idx_dict)]
-        last_num_word = word_idx_dict[get_highest_key(word_idx_dict)]
+            while word in line[idx:]:
+                # find index of start of word
+                # add to tracker
+                # move index past end of word
+                idx += line[idx:].find(word)
+                tracker.add(idx, word)
+                idx += word_length
 
-        print(first_num_word)
-        print(last_num_word)
-
-        # concat = int(str(first) + str(last))
+        first = tracker.get_first()
+        last = tracker.get_last()
+        concat = int(str(first) + str(last))
+        total += concat
+        print(total)

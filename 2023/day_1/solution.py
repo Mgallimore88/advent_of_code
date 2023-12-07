@@ -1,4 +1,4 @@
-file = "input"
+file = "input.txt"
 
 with open(file) as f:
     lines = (line.rstrip() for line in f)
