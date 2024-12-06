@@ -19,13 +19,18 @@ matrix = np.array([list(row) for row in list_of_lines])
 
 
 # 3. find the occurence of a pattern in each row of the matrix
-# string = "".join(char_matrix[1])
-# looking for "XMAS" in a string
 pattern = "XMAS"
-# print(re.findall(pattern, string))
+
+def count_matches(mat, pattern=pattern):
+    all_matches = []
+    for row in mat:
+        string = "".join(row)
+        matches = re.findall(pattern, string)
+        all_matches += matches
+    return len(all_matches)
 
 
-# 4. Define the transforms and match counter
+# 4. Define the transforms
 def x_transform(mat):
     return np.fliplr(mat)
 
@@ -44,16 +49,6 @@ def diagonal_transform(mat):
 
 def rotate_90_ccw(mat):
     return np.rot90(mat)
-
-
-def count_matches(mat, pattern=pattern):
-    all_matches = []
-    for row in mat:
-        string = "".join(row)
-        matches = re.findall(pattern, string)
-        all_matches += matches
-    return len(all_matches)
-
 
 # 5. Perform all eight possible transforms and find the pattern matches in each of the resulting matrices.
 
