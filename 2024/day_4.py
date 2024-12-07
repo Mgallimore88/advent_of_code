@@ -21,6 +21,7 @@ matrix = np.array([list(row) for row in list_of_lines])
 # 3. find the occurence of a pattern in each row of the matrix
 pattern = "XMAS"
 
+
 def count_matches(mat, pattern=pattern):
     all_matches = []
     for row in mat:
@@ -50,6 +51,7 @@ def diagonal_transform(mat):
 def rotate_90_ccw(mat):
     return np.rot90(mat)
 
+
 # 5. Perform all eight possible transforms and find the pattern matches in each of the resulting matrices.
 
 # East
@@ -73,10 +75,37 @@ print("part 1")
 print(matches)
 
 # Part 2
-# Make a 9 x 9 kernel which iterates along the matrix printing out each possible 9x9 grid
-kernel = np.array([1,1,1], [1,1,1], [1,1,1])
 
-def sliding_window()
+# Make a 3x3 window view of the matrix
+from numpy.lib.stride_tricks import sliding_window_view
+
+windows = sliding_window_view(matrix, (3, 3))
+
+# string patterns to match
+mas = ["M", "A", "S"]
+sam = ["S", "A", "M"]
+
+count = 0
 
 
-# Return the ones where the centre cell is "A"
+def check_x_mas(grid):
+    counts = 0
+    northwest_diag = np.diag(grid).tolist()
+    southeast_diag = np.diag(np.fliplr(grid)).tolist()
+
+    northwest_match = northwest_diag == mas or northwest_diag == sam
+    southeast_match = southeast_diag == mas or southeast_diag == sam
+
+    if northwest_match and southeast_match:
+        print(grid)
+        counts += 1
+    return counts
+
+
+# the numpy array has a shape of (138, 138, 3, 3) and we need to access the 3x3 windows.
+# Iterate into the numpy array using nested loops:
+for i in range(windows.shape[0]):
+    for j in range(windows.shape[1]):
+        grid = windows[i, j, :, :]
+        count += check_x_mas(grid)
+print(count)
